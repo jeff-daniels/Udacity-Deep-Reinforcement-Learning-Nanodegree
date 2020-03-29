@@ -1,0 +1,1 @@
+For this coding exercise, OpenAI Gym's Taxi-v2 environment was used to design an algorithm to teach a taxi agent to navigate a small gridworld. Previous lessons were applied to this new environment.  Specifically, a Q-learning or sarsamax algorithm was used to update the action value function.
