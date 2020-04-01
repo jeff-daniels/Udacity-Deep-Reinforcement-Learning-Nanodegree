@@ -11,7 +11,7 @@ import torch.optim as optim
 BUFFER_SIZE = int(1e5)  # replay buffer size
 BATCH_SIZE = 64         # minibatch size
 GAMMA = 0.99            # discount factor
-TAU = 1e-3              # for soft update of target parameters
+TAU = 1e-2              # for soft update of target parameters
 LR = 5e-4               # learning rate 
 UPDATE_EVERY = 4        # how often to update the network
 
@@ -116,7 +116,17 @@ class Agent():
         for target_param, local_param in zip(target_model.parameters(), local_model.parameters()):
             target_param.data.copy_(tau*local_param.data + (1.0-tau)*target_param.data)
 
-
+    def print_hyperparameters(self):
+        """
+        Prints out the hyperparameters
+        """
+        print('BUFFER_SIZE = {:d}'.format(BUFFER_SIZE))
+        print('BATCH_SIZE = {:d}'.format(BATCH_SIZE))
+        print('GAMMA = {:.2f}'.format(GAMMA))
+        print('TAU = {:f}'.format(TAU))
+        print('LR = {:f}'.format(LR)) 
+        print('UPDATE_EVERY = {:d}'.format(UPDATE_EVERY))
+        
 class ReplayBuffer:
     """Fixed-size buffer to store experience tuples."""
 
