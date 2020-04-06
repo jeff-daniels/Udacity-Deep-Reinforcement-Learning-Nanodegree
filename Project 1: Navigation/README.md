@@ -23,9 +23,9 @@ The outline for the report can be found in the [`p1_navigation folder`](https://
 Code that was modified to implement a Deep Q-Network is found in the [`dqn/solution folder`](https://github.com/udacity/deep-reinforcement-learning/tree/master/dqn)
 
 ## List of Files:
-- [`Report.ipynb`]() A report describing the learning algorithm, the details for implementation, and ideas for future work.
-- [`dqn_network.py`]() Code for a Deep Q-Network containing the Agent class that is used in the learning algorithm.
-- [`model.py`]() Code for the QNetwork class which used to construct a pyTorch deep neural network.
-- [`checkpoint.pth`]() Trained model weights of the final and best implementation of the learning algorithm.
-- [`Navigation_Hyperparameters.ods`]() A spreadsheet tracking the hyperparameter tuning process.
+- [`Report.ipynb`](https://github.com/jeff-daniels/Udacity-DRLND/blob/master/Project%201:%20Navigation/Report.ipynb) A report describing the learning algorithm, the details for implementation, and ideas for future work.
+- [`dqn_network.py`](https://github.com/jeff-daniels/Udacity-DRLND/blob/master/Project%201:%20Navigation/dqn_agent.py) Code for a Deep Q-Network containing the Agent class that is used in the learning algorithm.
+- [`model.py`](https://github.com/jeff-daniels/Udacity-DRLND/blob/master/Project%201:%20Navigation/model.py) Code for the QNetwork class which used to construct a pyTorch deep neural network.
+- [`checkpoint.pth`](https://github.com/jeff-daniels/Udacity-DRLND/blob/master/Project%201:%20Navigation/checkpoint.pth) Trained model weights of the final and best implementation of the learning algorithm.
+- [`Navigation_Hyperparameters.ods`](https://github.com/jeff-daniels/Udacity-DRLND/blob/master/Project%201:%20Navigation/%20Navigation%20Hyperparameters.ods) A spreadsheet tracking the hyperparameter tuning process.
 
