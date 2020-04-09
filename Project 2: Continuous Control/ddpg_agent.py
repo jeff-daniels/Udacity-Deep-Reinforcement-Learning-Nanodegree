@@ -20,7 +20,8 @@ TAU = 1e-3              # for soft update of target parameters
 LR_ACTOR = 1e-4         # learning rate of the actor 
 LR_CRITIC = 3e-4        # learning rate of the critic
 WEIGHT_DECAY = 0.0001   # L2 weight decay
-UPDATE_EVERY = 4        # how often to update the network
+UPDATE_EVERY = 20       # how often to update the networks in time steps
+N_UPDATES = 10          # how many updates to perform per UPDATE_EVERY
 FC_UNITS_ACTOR = 256    # number of nodes in hidden layer for Actor
 FCS1_UNITS_CRITIC = 256 # number of nodes in first hidden layor for Critic
 FC2_UNITS_CRITIC = 256  # number of nodes in second hidden layor for Critic
@@ -58,20 +59,20 @@ class Agent():
         self.noise = OUNoise(action_size, random_seed)
 
         # Replay memory
-        self.memory = ReplayBuffer(action_size, BUFFER_SIZE, BATCH_SIZE, random_seed)
+        # self.memory = ReplayBuffer(action_size, BUFFER_SIZE, BATCH_SIZE, random_seed)
         # Initialize time step (for updating every UPDATE_EVERY steps)
         self.t_step = 0
             
-    def step(self, state, action, reward, next_state, done):
+    def step(self, state, action, reward, next_state, done, memory):
         # Save experience in replay memory
-        self.memory.add(state, action, reward, next_state, done)
+        memory.add(state, action, reward, next_state, done)
         
         # Learn every UPDATE_EVERY time steps.
         self.t_step = (self.t_step + 1) % UPDATE_EVERY
         if self.t_step == 0:
             # If enough samples are available in memory, get random subset and learn
-            if len(self.memory) > BATCH_SIZE:
-                experiences = self.memory.sample()
+            if len(memory) > BATCH_SIZE:
+                experiences = memory.sample()
                 self.learn(experiences, GAMMA)               
 
     def act(self, state, add_noise=True):
@@ -113,6 +114,7 @@ class Agent():
         # Minimize the loss
         self.critic_optimizer.zero_grad()
         critic_loss.backward()
+        torch.nn.utils.clip_grad_norm(self.critic_local.parameters(), 1)
         self.critic_optimizer.step()
 
         # ---------------------------- update actor ---------------------------- #
