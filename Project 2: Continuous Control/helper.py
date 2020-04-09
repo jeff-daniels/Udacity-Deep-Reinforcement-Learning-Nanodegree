@@ -18,6 +18,7 @@ def print_hyperparameters(agent=None):
         print('LR_CRITIC = {}'.format(agent.LR_CRITIC))
         print('WEIGHT_DECAY = {}'.format(agent.WEIGHT_DECAY))
         print('UPDATE_EVERY = {}'.format(agent.UPDATE_EVERY))
+        print('N_UPDATES = {}'.format(agent.N_UPDATES))          
         print('FC_UNITS_ACTOR = {}'.format(agent.FC_UNITS_ACTOR))
         print('FCS1_UNITS_CRITIC = {}'.format(agent.FCS1_UNITS_CRITIC))
         print('FC2_UNITS_CRITIC = {}'.format(agent.FC2_UNITS_CRITIC))
@@ -25,11 +26,11 @@ def print_hyperparameters(agent=None):
     return None
 
 def plot_scores(scores, rolling_window=10, title = 'Scores'):
-    """ Plots the scores and a rolling average"""
+    """ Plots the average score across agents for each episode and a rolling average"""
     fig = plt.figure()
     ax = fig.add_subplot(111)
-    plt.plot(np.arange(len(scores)), scores)
-    rolling_mean = pd.Series(scores).rolling(rolling_window).mean()
+    plt.plot(np.arange(len(scores)), np.mean(scores, 1))
+    rolling_mean = pd.Series(np.mean(scores,1)).rolling(rolling_window).mean()
     plt.plot(rolling_mean)
     plt.title(title)
     plt.ylabel('Score')
