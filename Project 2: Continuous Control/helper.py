@@ -6,23 +6,35 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+import importlib
+import torch
+import time
+import ddpg_agent
+
+def get_hyperparameters(agent):
+    hyper_dict = {
+        'BUFFER_SIZE': agent.BUFFER_SIZE,
+        'BATCH_SIZE': agent.BATCH_SIZE,
+        'GAMMA': agent.GAMMA,
+        'TAU': agent.TAU,
+        'LR_ACTOR': agent.LR_ACTOR,
+        'LR_CRITIC': agent.LR_CRITIC,
+        'WEIGHT_DECAY': agent.WEIGHT_DECAY,
+        'UPDATE_EVERY': agent.UPDATE_EVERY,
+        'N_UPDATES': agent.N_UPDATES,
+        'FC1_UNITS_ACTOR': agent.FC1_UNITS_ACTOR,
+        'FC2_UNITS_ACTOR': agent.FC2_UNITS_ACTOR,
+        'FCS1_UNITS_CRITIC': agent.FCS1_UNITS_CRITIC,
+        'FC2_UNITS_CRITIC': agent.FC2_UNITS_CRITIC
+    }
+    return hyper_dict
 
 def print_hyperparameters(agent=None):
     ''' Prints out the agents Hyperparameters'''
     if agent is not None:
-        print('BUFFER_SIZE = {}'.format(agent.BUFFER_SIZE))
-        print('BATCH_SIZE = {}'.format(agent.BATCH_SIZE))
-        print('GAMMA = {}'.format(agent.GAMMA))
-        print('TAU = {}'.format(agent.TAU))
-        print('LR_ACTOR = {}'.format(agent.LR_ACTOR))
-        print('LR_CRITIC = {}'.format(agent.LR_CRITIC))
-        print('WEIGHT_DECAY = {}'.format(agent.WEIGHT_DECAY))
-        print('UPDATE_EVERY = {}'.format(agent.UPDATE_EVERY))
-        print('N_UPDATES = {}'.format(agent.N_UPDATES))          
-        print('FC1_UNITS_ACTOR = {}'.format(agent.FC1_UNITS_ACTOR))
-        print('FC2_UNITS_ACTOR = {}'.format(agent.FC2_UNITS_ACTOR))
-        print('FC1_UNITS_CRITIC = {}'.format(agent.FC1_UNITS_CRITIC))
-        print('FC2_UNITS_CRITIC = {}'.format(agent.FC2_UNITS_CRITIC))
+        hyper_parameters = get_hyperparameters(agent)
+    for key, value in hyper_parameters.items():
+        print(key, '=', value)
     return None
 
 def plot_scores(scores, rolling_window=10, title = 'Scores'):

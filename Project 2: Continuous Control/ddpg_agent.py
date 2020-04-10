@@ -20,11 +20,11 @@ TAU = 1e-3              # for soft update of target parameters
 LR_ACTOR = 3e-4         # learning rate of the actor 
 LR_CRITIC = 1e-3        # learning rate of the critic
 WEIGHT_DECAY = 0.0000   # L2 weight decay
-UPDATE_EVERY = 20       # how often to update the networks in time steps
-N_UPDATES = 10          # how many updates to perform per UPDATE_EVERY
+UPDATE_EVERY = 4        # how often to update the networks in time steps
+N_UPDATES = 1           # how many updates to perform per UPDATE_EVERY
 FC1_UNITS_ACTOR = 256   # number of nodes in first hidden layer for Actor
 FC2_UNITS_ACTOR = 128   # number of nodes in second hidden layer for Actor   
-FC1_UNITS_CRITIC = 256  # number of nodes in first hidden layor for Critic
+FCS1_UNITS_CRITIC = 256 # number of nodes in first hidden layor for Critic
 FC2_UNITS_CRITIC = 128  # number of nodes in second hidden layor for Critic
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -51,8 +51,10 @@ class Agent():
         self.actor_optimizer = optim.Adam(self.actor_local.parameters(), lr=LR_ACTOR)
 
         # Critic Network (w/ Target Network)
-        self.critic_local = Critic(state_size, action_size, random_seed, FC1_UNITS_CRITIC, FC2_UNITS_CRITIC).to(device)
-        self.critic_target = Critic(state_size, action_size, random_seed, FC1_UNITS_CRITIC, FC2_UNITS_CRITIC).to(device)
+        self.critic_local = Critic(state_size, action_size, random_seed, 
+                                   FCS1_UNITS_CRITIC, FC2_UNITS_CRITIC).to(device)
+        self.critic_target = Critic(state_size, action_size, random_seed, 
+                                    FCS1_UNITS_CRITIC, FC2_UNITS_CRITIC).to(device)
         self.critic_optimizer = optim.Adam(self.critic_local.parameters(), lr=LR_CRITIC, weight_decay=WEIGHT_DECAY)
 
         # Noise process
@@ -164,10 +166,7 @@ class OUNoise:
         dx = self.theta * (self.mu - x) + self.sigma * np.random.standard_normal(len(x))
         self.state = x + dx
         return self.state
-
-
-# Move this outside of ReplayBuffer class to accomadate pickle
-# experience = namedtuple("Experience", field_names=["state", "action", "reward", "next_state", "done"])    
+  
     
 class ReplayBuffer:
     """Fixed-size buffer to store experience tuples."""
