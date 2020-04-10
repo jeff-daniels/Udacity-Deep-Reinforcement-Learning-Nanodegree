@@ -23,7 +23,7 @@ WEIGHT_DECAY = 0.0000   # L2 weight decay
 UPDATE_EVERY = 20       # how often to update the networks in time steps
 N_UPDATES = 10          # how many updates to perform per UPDATE_EVERY
 FC1_UNITS_ACTOR = 256   # number of nodes in first hidden layer for Actor
-FC2_UNITS_ACTOR 128     # number of nodes in second hidden layer for Actor   
+FC2_UNITS_ACTOR = 128   # number of nodes in second hidden layer for Actor   
 FC1_UNITS_CRITIC = 256  # number of nodes in first hidden layor for Critic
 FC2_UNITS_CRITIC = 128  # number of nodes in second hidden layor for Critic
 
