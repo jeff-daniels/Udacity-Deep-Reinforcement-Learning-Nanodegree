@@ -29,9 +29,6 @@ FC2_UNITS_CRITIC = 128  # number of nodes in second hidden layor for Critic
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
-# Move this outside of ReplayBuffer class to accomadate pickle
-experience = namedtuple("Experience", field_names=["state", "action", "reward", "next_state", "done"])
-
 class Agent():
     """Interacts with and learns from the environment."""
     
@@ -168,9 +165,16 @@ class OUNoise:
         self.state = x + dx
         return self.state
 
+
+# Move this outside of ReplayBuffer class to accomadate pickle
+# experience = namedtuple("Experience", field_names=["state", "action", "reward", "next_state", "done"])    
+    
 class ReplayBuffer:
     """Fixed-size buffer to store experience tuples."""
-
+    
+    experience = namedtuple("Experience", field_names=["state", "action", "reward", "next_state", "done"]) 
+    experience.__qualname__ = 'ReplayBuffer.experience'
+    
     def __init__(self, action_size, buffer_size, batch_size, seed):
         """Initialize a ReplayBuffer object.
         Params
@@ -180,14 +184,12 @@ class ReplayBuffer:
         """
         self.action_size = action_size
         self.memory = deque(maxlen=buffer_size)  # internal memory (deque)
-        self.batch_size = batch_size
-        # self.experience = namedtuple("Experience", field_names=["state", "action", "reward", "next_state", "done"])
+        self.batch_size = batch_size        
         self.seed = random.seed(seed)
     
     def add(self, state, action, reward, next_state, done):
         """Add a new experience to memory."""
-        # e = self.experience(state, action, reward, next_state, done)
-        e = experience(state, action, reward, next_state, done)
+        e = ReplayBuffer.experience(state, action, reward, next_state, done)
         self.memory.append(e)
     
     def sample(self):
