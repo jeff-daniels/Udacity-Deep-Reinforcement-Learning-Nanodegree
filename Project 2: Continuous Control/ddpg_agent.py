@@ -18,14 +18,14 @@ BATCH_SIZE = 128        # minibatch size
 GAMMA = 0.99            # discount factor
 TAU = 1e-3              # for soft update of target parameters
 LR_ACTOR = 1e-4         # learning rate of the actor 
-LR_CRITIC = 3e-4        # learning rate of the critic
-WEIGHT_DECAY = 0.0001   # L2 weight decay
-UPDATE_EVERY = 1        # how often to update the networks in time steps
-N_UPDATES = 1           # how many updates to perform per UPDATE_EVERY
-FC_UNITS_ACTOR = 256    # number of nodes in hidden layer for Actor
-FCS1_UNITS_CRITIC = 256 # number of nodes in first hidden layor for Critic
-FC2_UNITS_CRITIC = 256  # number of nodes in second hidden layor for Critic
-FC3_UNITS_CRITIC = 128  # number of nodes in third hidden layor for Critic
+LR_CRITIC = 1e-4        # learning rate of the critic
+WEIGHT_DECAY = 0.0000   # L2 weight decay
+UPDATE_EVERY = 20       # how often to update the networks in time steps
+N_UPDATES = 10          # how many updates to perform per UPDATE_EVERY
+FC1_UNITS_ACTOR = 256   # number of nodes in first hidden layer for Actor
+FC2_UNITS_ACTOR 128     # number of nodes in second hidden layer for Actor   
+FC1_UNITS_CRITIC = 256  # number of nodes in first hidden layor for Critic
+FC2_UNITS_CRITIC = 128  # number of nodes in second hidden layor for Critic
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
@@ -46,13 +46,13 @@ class Agent():
         self.seed = np.random.seed(random_seed)
 
         # Actor Network (w/ Target Network)
-        self.actor_local = Actor(state_size, action_size, random_seed, FC_UNITS_ACTOR).to(device)
-        self.actor_target = Actor(state_size, action_size, random_seed, FC_UNITS_ACTOR).to(device)
+        self.actor_local = Actor(state_size, action_size, random_seed, FC1_UNITS_ACTOR, FC2_UNITS_ACTOR).to(device)
+        self.actor_target = Actor(state_size, action_size, random_seed, FC1_UNITS_ACTOR, FC2_UNITS_ACTOR).to(device)
         self.actor_optimizer = optim.Adam(self.actor_local.parameters(), lr=LR_ACTOR)
 
         # Critic Network (w/ Target Network)
-        self.critic_local = Critic(state_size, action_size, random_seed, FCS1_UNITS_CRITIC, FC2_UNITS_CRITIC, FC3_UNITS_CRITIC).to(device)
-        self.critic_target = Critic(state_size, action_size, random_seed, FCS1_UNITS_CRITIC, FC2_UNITS_CRITIC, FC3_UNITS_CRITIC).to(device)
+        self.critic_local = Critic(state_size, action_size, random_seed, FC1_UNITS_CRITIC, FC2_UNITS_CRITIC).to(device)
+        self.critic_target = Critic(state_size, action_size, random_seed, FC1_UNITS_CRITIC, FC2_UNITS_CRITIC).to(device)
         self.critic_optimizer = optim.Adam(self.critic_local.parameters(), lr=LR_CRITIC, weight_decay=WEIGHT_DECAY)
 
         # Noise process
