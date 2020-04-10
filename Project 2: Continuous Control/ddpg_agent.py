@@ -17,8 +17,8 @@ BUFFER_SIZE = int(1e6)  # replay buffer size
 BATCH_SIZE = 128        # minibatch size
 GAMMA = 0.99            # discount factor
 TAU = 1e-3              # for soft update of target parameters
-LR_ACTOR = 1e-4         # learning rate of the actor 
-LR_CRITIC = 1e-4        # learning rate of the critic
+LR_ACTOR = 3e-4         # learning rate of the actor 
+LR_CRITIC = 1e-3        # learning rate of the critic
 WEIGHT_DECAY = 0.0000   # L2 weight decay
 UPDATE_EVERY = 20       # how often to update the networks in time steps
 N_UPDATES = 10          # how many updates to perform per UPDATE_EVERY
@@ -28,6 +28,9 @@ FC1_UNITS_CRITIC = 256  # number of nodes in first hidden layor for Critic
 FC2_UNITS_CRITIC = 128  # number of nodes in second hidden layor for Critic
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+
+# Move this outside of ReplayBuffer class to accomadate pickle
+experience = namedtuple("Experience", field_names=["state", "action", "reward", "next_state", "done"])
 
 class Agent():
     """Interacts with and learns from the environment."""
@@ -178,12 +181,13 @@ class ReplayBuffer:
         self.action_size = action_size
         self.memory = deque(maxlen=buffer_size)  # internal memory (deque)
         self.batch_size = batch_size
-        self.experience = namedtuple("Experience", field_names=["state", "action", "reward", "next_state", "done"])
+        # self.experience = namedtuple("Experience", field_names=["state", "action", "reward", "next_state", "done"])
         self.seed = random.seed(seed)
     
     def add(self, state, action, reward, next_state, done):
         """Add a new experience to memory."""
-        e = self.experience(state, action, reward, next_state, done)
+        # e = self.experience(state, action, reward, next_state, done)
+        e = experience(state, action, reward, next_state, done)
         self.memory.append(e)
     
     def sample(self):
