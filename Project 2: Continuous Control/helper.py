@@ -37,6 +37,34 @@ def print_hyperparameters(agent=None):
         print(key, '=', value)
     return None
 
+def save_checkpoint(agents, scores_per_episode, module, path='checkpoint.tar'):
+   torch.save({'scores_per_episode': scores_per_episode, 
+               'memory': agents.memory,
+               'hyperparameters': get_hyperparameters(module),
+               'actor_local_dict': agents.actor_local.state_dict(),
+               'actor_target_dict': agents.actor_target.state_dict(),
+               'critic_local_dict': agents.critic_local.state_dict(),
+               'critic_target_dict': agents.critic_target.state_dict(),
+               'actor_optimizer_dict': agents.actor_optimizer.state_dict(),
+               'crtic_optimizer_dict': agents.critic_optimizer.state_dict()
+              }, path)
+   
+
+def load_checkpoint(agents, scores_per_episode, scores_window, path='checkpoint.tar'):
+    checkpoint = torch.load(path)
+    scores_per_episode = checkpoint['scores_per_episode']
+    for score in scores_per_episode:
+        scores_window.append(score)
+    agents.memory = checkpoint['memory']
+    agents.actor_local.load_state_dict(checkpoint['actor_local_dict'])
+    agents.actor_target.load_state_dict(checkpoint['actor_target_dict'])
+    agents.critic_local.load_state_dict(checkpoint['critic_local_dict'])
+    agents.critic_target.load_state_dict(checkpoint['critic_target_dict'])
+    agents.actor_optimizer.load_state_dict(checkpoint['actor_optimizer_dict'])
+    agents.critic_optimizer.load_state_dict(checkpoint['crtic_optimizer_dict'])
+    return agents, scores_per_episode, scores_window
+
+
 def plot_scores(scores, rolling_window=10, title = 'Scores'):
     """ Plots the average score across agents for each episode and a rolling average"""
     fig = plt.figure()
