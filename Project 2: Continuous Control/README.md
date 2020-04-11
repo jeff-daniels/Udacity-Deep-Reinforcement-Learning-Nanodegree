@@ -31,11 +31,11 @@ The model used were part of a Deep Deterministic Policy Gradient (DDPG) algorith
 ## Description of Files:  
 * [`Continuous_Control.ipynb`](https://github.com/jeff-daniels/Udacity-DRLND/blob/master/Project%202:%20Continuous%20Control/Continuous_Control.ipynb)  The notebook where the model was trained.  
 * [`DDPG Hyperparameter Tuning.ods`](https://github.com/jeff-daniels/Udacity-DRLND/blob/master/Project%202:%20Continuous%20Control/DDPG%20Hyperparameter%20Tuning.ods)  Spreadsheet used for keeping track of hyperparameters during tuning.  
+* [`Report.md`]()  Report describing learning algorithm. Describes details of the implementation, along with ideas for future work. 
 * [`checkpoint_06-without_memory.tar`](https://github.com/jeff-daniels/Udacity-DRLND/blob/master/Project%202:%20Continuous%20Control/checkpoint_06-without_memory.tar)  Backup file of the model to resume training.  Contains all the model weights, optimizers, a dictionary of hyperparameters used, and an array of scores for all the episodes.  Usually contains a Replay Buffer memory that is too large to be uploaded.  
 * [`checkpoint_actor.pth`](https://github.com/jeff-daniels/Udacity-DRLND/blob/master/Project%202:%20Continuous%20Control/checkpoint_actor.pth)  Actor model weights.  
 * [`checkpoint_critic.pth`](https://github.com/jeff-daniels/Udacity-DRLND/blob/master/Project%202:%20Continuous%20Control/checkpoint_critic.pth)  Critic model weights.  
 * [`ddpg_agent.py`](https://github.com/jeff-daniels/Udacity-DRLND/blob/master/Project%202:%20Continuous%20Control/ddpg_agent.py)  Module for creating an **Agent** that implements DDPG.  
 * [`helper.py`](https://github.com/jeff-daniels/Udacity-DRLND/blob/master/Project%202:%20Continuous%20Control/helper.py)  Module of various helper functions.  
 * [`model.py`](https://github.com/jeff-daniels/Udacity-DRLND/blob/master/Project%202:%20Continuous%20Control/model.py)  Module for building the **Actor** and **Critic** neural networks.  
-* [`Report.md`]()  Report describing learning algorithm. Describes details of the implementation, along with ideas for future work.
 
