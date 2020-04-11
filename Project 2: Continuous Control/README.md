@@ -26,7 +26,7 @@ Then, place the file in the `p2_continuous-control/` folder in the DRLND GitHub 
 Finally, if you followed the instructions effectively, open `Continuous_Control.ipynb` (located in the `p2_continuous-control/` folder in the DRLND GitHub repository) and follow the instructions to learn how to use the Python API to control the agent.  This notebook was primary prototyping platform for developing the model.  The model was trained in this notebook and after the benchmark score was achieved, the model weights were saved as `checkpoint_actor.pth` and `checkpoint_critic.pth`.  
 
 ## Solution:  
-The models used were part of a Deep Deterministic Policy Gradient (DDPG) algorithm.  More information about using Actor-Critic methods can be found in this [paper](https://arxiv.org/abs/1509.02971).
+The model used were part of a Deep Deterministic Policy Gradient (DDPG) algorithm.  More information about using Actor-Critic methods can be found in this [paper](https://arxiv.org/abs/1509.02971).  Details about my implementation can be found in [`Report.ipynb`]()
 
 ## Description of Files:  
 * [`Continuous_Control.ipynb`](https://github.com/jeff-daniels/Udacity-DRLND/blob/master/Project%202:%20Continuous%20Control/Continuous_Control.ipynb)  The notebook where the model was trained.  
