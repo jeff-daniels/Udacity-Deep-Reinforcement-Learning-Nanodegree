@@ -38,7 +38,7 @@ def print_hyperparameters(agent=None):
     return None
 
 def save_checkpoint(agents, scores_per_episode, module, path='checkpoint.tar'):
-   """ saves the model weights and optimizers, the scores_per_episode and the ReplayBuffer memory"""
+    """ saves the model weights and optimizers, the scores_per_episode and the ReplayBuffer memory"""
     torch.save({'scores_per_episode': scores_per_episode, 
                'memory': agents.memory,
                'hyperparameters': get_hyperparameters(module),
@@ -49,7 +49,6 @@ def save_checkpoint(agents, scores_per_episode, module, path='checkpoint.tar'):
                'actor_optimizer_dict': agents.actor_optimizer.state_dict(),
                'crtic_optimizer_dict': agents.critic_optimizer.state_dict()
               }, path)
-   
 
 def load_checkpoint(agents, scores_per_episode, scores_window, path='checkpoint.tar'):
     """ loads a checkpoint to pick up training from the last saved checkpoint"""
