@@ -13,14 +13,14 @@ import torch
 import torch.nn.functional as F
 import torch.optim as optim
 
-BUFFER_SIZE = int(1e6)  # replay buffer size
+BUFFER_SIZE = int(1e5)  # replay buffer size
 BATCH_SIZE = 128        # minibatch size
 GAMMA = 0.99            # discount factor
 TAU = 1e-3              # for soft update of target parameters
 LR_ACTOR = 3e-4         # learning rate of the actor 
 LR_CRITIC = 1e-3        # learning rate of the critic
 WEIGHT_DECAY = 0.0000   # L2 weight decay
-UPDATE_EVERY = 20       # how often to update the networks in time steps
+UPDATE_EVERY = 3        # how often to update the networks in time steps
 N_UPDATES = 20          # how many updates to perform per UPDATE_EVERY
 FC1_UNITS_ACTOR = 256   # number of nodes in first hidden layer for Actor
 FC2_UNITS_ACTOR = 128   # number of nodes in second hidden layer for Actor   
