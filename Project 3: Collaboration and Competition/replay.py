@@ -4,11 +4,13 @@
 # declaration at the top                                              #
 #######################################################################
 
+# Modified by Jeff Daniels (jeffrey.arthur.daniels@gmail.com) 2020
+# For Udacity Deep Reinforcement Learning Nanodegree
+
 import torch
 import numpy as np
 import torch.multiprocessing as mp
 from collections import deque
-from ..utils import *
 
 
 class Replay:
