@@ -29,21 +29,24 @@ class PPOAgent():
         config = self.config
         storage = Storage(config.rollout_length)
         states = self.states
+        
         for _ in range(config.rollout_length):
             prediction = self.network(states)
+
             environment_info = self.environment.step(to_np(prediction['a']))[self.brain_name]
             next_states = environment_info.vector_observations 
             rewards = environment_info.rewards
             terminals = environment_info.local_done
+            terminals = np.array([1 if terminal else 0 for terminal in terminals])
             rewards = config.reward_normalizer(rewards)
             next_states = config.state_normalizer(next_states)
             storage.add(prediction)
             storage.add({'r': tensor(rewards).unsqueeze(-1),
-                         'm': tensor([term-1 for term in terminals]).unsqueeze(-1),
+                         'm': tensor(1 - terminals).unsqueeze(-1),
                          's': tensor(states)})
             states = next_states
-            self.total_steps += config.num_workers
-
+            self.total_steps += config.num_agents
+        
         self.states = states
         prediction = self.network(states)
         storage.add(prediction)
