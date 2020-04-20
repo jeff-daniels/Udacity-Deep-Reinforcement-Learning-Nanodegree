@@ -86,3 +86,44 @@ def translate(pattern):
 def split(a, n):
     k, m = divmod(len(a), n)
     return (a[i * k + min(i, m):(i + 1) * k + min(i + 1, m)] for i in range(n))
+
+
+def close_obj(obj):
+    if hasattr(obj, 'close'):
+        obj.close()
+
+
+def random_sample(indices, batch_size):
+    indices = np.asarray(np.random.permutation(indices))
+    batches = indices[:len(indices) // batch_size * batch_size].reshape(-1, batch_size)
+    for batch in batches:
+        yield batch
+    r = len(indices) % batch_size
+    if r:
+        yield indices[-r:]
+
+
+def generate_tag(params):
+    if 'tag' in params.keys():
+        return
+    game = params['game']
+    params.setdefault('run', 0)
+    run = params['run']
+    del params['game']
+    del params['run']
+    str = ['%s_%s' % (k, v) for k, v in sorted(params.items())]
+    tag = '%s-%s-run-%d' % (game, '-'.join(str), run)
+    params['tag'] = tag
+    params['game'] = game
+    params['run'] = run
+
+
+def translate(pattern):
+    groups = pattern.split('.')
+    pattern = ('\.').join(groups)
+    return pattern
+
+
+def split(a, n):
+    k, m = divmod(len(a), n)
+    return (a[i * k + min(i, m):(i + 1) * k + min(i + 1, m)] for i in range(n))
