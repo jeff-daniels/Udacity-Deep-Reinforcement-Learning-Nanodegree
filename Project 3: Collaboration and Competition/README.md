@@ -30,12 +30,12 @@ Finally, if you followed the instructions effectively, open `Tennis.ipynb` (loca
 The model used were part of a Deep Deterministic Policy Gradient (DDPG) algorithm.  More information about using Actor-Critic methods can be found in this [paper](https://arxiv.org/abs/1509.02971).  Details about my implementation can be found in [`Report.md`]()
 
 ## Description of Files:  
-* [`Tennis.ipynb`]()  The notebook where the model was trained.  
-* [`Project 3: Collaboration and Competition Parameter.ods`]()  Spreadsheet used for keeping track of hyperparameters during tuning.  
-* [`Report.md`]()  Report describing learning algorithm. Describes details of the implementation, along with ideas for future work. 
-* [`checkpoint_actor.pth`]()  Actor model weights.  
-* [`checkpoint_critic.pth`]()  Critic model weights.  
-* [`ddpg_agent.py`]()  Module for creating an **Agent** that implements DDPG.  
-* [`helper.py`]()  Module of various helper functions.  
-* [`model.py`]()  Module for building the **Actor** and **Critic** neural networks.  
-* [`workspace_utils.py`]()  Module for that disallows workspace slumbering.  
+* [`Tennis.ipynb`](https://github.com/jeff-daniels/Udacity-DRLND/blob/master/Project%203:%20Collaboration%20and%20Competition/Report.md)  The notebook where the model was trained.  
+* [`Project 3: Collaboration and Competition Parameter.ods`](https://github.com/jeff-daniels/Udacity-DRLND/blob/master/Project%203:%20Collaboration%20and%20Competition/Project%203_%20Collaboration%20and%20Competition%20Parameters.ods)  Spreadsheet used for keeping track of hyperparameters during tuning.  
+* [`Report.md`](https://github.com/jeff-daniels/Udacity-DRLND/blob/master/Project%203:%20Collaboration%20and%20Competition/Report.md)  Report describing learning algorithm. Describes details of the implementation, along with ideas for future work. 
+* [`checkpoint_actor.pth`](https://github.com/jeff-daniels/Udacity-DRLND/blob/master/Project%203:%20Collaboration%20and%20Competition/checkpoint_actor.pth)  Actor model weights.  
+* [`checkpoint_critic.pth`](https://github.com/jeff-daniels/Udacity-DRLND/blob/master/Project%203:%20Collaboration%20and%20Competition/checkpoint_critic.pth)  Critic model weights.  
+* [`ddpg_agent.py`](https://github.com/jeff-daniels/Udacity-DRLND/blob/master/Project%203:%20Collaboration%20and%20Competition/ddpg_agent.py)  Module for creating an **Agent** that implements DDPG.  
+* [`helper.py`](https://github.com/jeff-daniels/Udacity-DRLND/blob/master/Project%203:%20Collaboration%20and%20Competition/helper.py)  Module of various helper functions.  
+* [`model.py`](https://github.com/jeff-daniels/Udacity-DRLND/blob/master/Project%203:%20Collaboration%20and%20Competition/model.py)  Module for building the **Actor** and **Critic** neural networks.  
+* [`workspace_utils.py`](https://github.com/jeff-daniels/Udacity-DRLND/blob/master/Project%203:%20Collaboration%20and%20Competition/workspace_utils.py)  Module for that disallows workspace slumbering.  
