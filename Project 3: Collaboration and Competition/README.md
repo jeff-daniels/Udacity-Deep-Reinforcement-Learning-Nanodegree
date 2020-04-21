@@ -1,7 +1,3 @@
-a README that describes how someone not familiar with this project should use your repository. The README should be designed for a general audience that may not be familiar with the Nanodegree program; you should describe the environment that you solved, along with how to install the requirements before running the code in your repository.
-the code that you use for training the agent, along with the trained model weights.
-a report describing your learning algorithm. This is where you will describe the details of your implementation, along with ideas for future work
-
 # Udacity Deep Reinforcement Learning Nanodegree: Collaboration and Competition Project  
 
 The goal of this project is to develop a deep reinforcement learning model that interacts with an environment similar to the Unity ML-Agents [Tennis](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Learning-Environment-Examples.md#tennis) environment.  In this environment, two agents control rackets to bounce a ball over a net. If an agent hits the ball over the net, it receives a reward of +0.1. If an agent lets a ball hit the ground or hits the ball out of bounds, it receives a reward of -0.01. Thus, the goal of each agent is to keep the ball in play.
