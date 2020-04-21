@@ -20,12 +20,13 @@ TAU = 1e-3              # for soft update of target parameters
 LR_ACTOR = 3e-4         # learning rate of the actor 
 LR_CRITIC = 1e-3        # learning rate of the critic
 WEIGHT_DECAY = 0.0000   # L2 weight decay
-UPDATE_EVERY = 20       # how often to update the networks in time steps
-N_UPDATES = 20          # how many updates to perform per UPDATE_EVERY
-FC1_UNITS_ACTOR = 256   # number of nodes in first hidden layer for Actor
-FC2_UNITS_ACTOR = 128   # number of nodes in second hidden layer for Actor   
-FCS1_UNITS_CRITIC = 256 # number of nodes in first hidden layor for Critic
-FC2_UNITS_CRITIC = 128  # number of nodes in second hidden layor for Critic
+UPDATE_EVERY = 20        # how often to update the networks in time steps
+N_UPDATES = 20           # how many updates to perform per UPDATE_EVERY
+FC1_UNITS_ACTOR = 512   # number of nodes in first hidden layer for Actor
+FC2_UNITS_ACTOR = 256   # number of nodes in second hidden layer for Actor   
+FCS1_UNITS_CRITIC = 512 # number of nodes in first hidden layor for Critic
+FC2_UNITS_CRITIC = 256  # number of nodes in second hidden layor for Critic
+CLIP_CRITIC_GRADIENT = False # Clip gradient during Critic optimization
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
@@ -122,7 +123,8 @@ class Agent():
         # Minimize the loss
         self.critic_optimizer.zero_grad()
         critic_loss.backward()
-        torch.nn.utils.clip_grad_norm_(self.critic_local.parameters(), 1)
+        if (CLIP_CRITIC_GRADIENT):
+            torch.nn.utils.clip_grad_norm_(self.critic_local.parameters(), 1)
         self.critic_optimizer.step()
 
         # ---------------------------- update actor ---------------------------- #
