@@ -19,28 +19,28 @@ The code for the [`ddpg-pendulum`](https://github.com/udacity/deep-reinforcement
 
 The hyperparameters in the `ddpg_agent` module include:  
 
-BUFFER_SIZE = int(1e5)  # replay buffer size
-BATCH_SIZE = 128        # minibatch size
-GAMMA = 0.99            # discount factor
-TAU = 1e-3              # for soft update of target parameters
-LR_ACTOR = 3e-4         # learning rate of the actor 
-LR_CRITIC = 1e-3        # learning rate of the critic
-WEIGHT_DECAY = 0.0000   # L2 weight decay
-UPDATE_EVERY = 20        # how often to update the networks in time steps
-N_UPDATES = 20           # how many updates to perform per UPDATE_EVERY 
+BUFFER_SIZE = int(1e5)  # replay buffer size  
+BATCH_SIZE = 128        # minibatch size  
+GAMMA = 0.99            # discount factor  
+TAU = 1e-3              # for soft update of target parameters  
+LR_ACTOR = 3e-4         # learning rate of the actor   
+LR_CRITIC = 1e-3        # learning rate of the critic  
+WEIGHT_DECAY = 0.0000   # L2 weight decay  
+UPDATE_EVERY = 20        # how often to update the networks in time steps  
+N_UPDATES = 20           # how many updates to perform per UPDATE_EVERY   
 
 These `model` hyperparameters are:   
 
-FC1_UNITS_ACTOR = 512   # number of nodes in first hidden layer for Actor
-FC2_UNITS_ACTOR = 256   # number of nodes in second hidden layer for Actor   
-FCS1_UNITS_CRITIC = 512 # number of nodes in first hidden layor for Critic
+FC1_UNITS_ACTOR = 512   # number of nodes in first hidden layer for Actor    
+FC2_UNITS_ACTOR = 256   # number of nodes in second hidden layer for Actor       
+FCS1_UNITS_CRITIC = 512 # number of nodes in first hidden layor for Critic  
 FC2_UNITS_CRITIC = 256  # number of nodes in second hidden layor for Critic  
 
 The actor network hidden layers are fully connected and use relu activations and a tanh activation for the action.  Input dimensions are the size of the observation space and output dimensions are the size of the action space.  
 
 The critic network layers are also fully connected and use relu activations but don't use any activation for the action.  Input dimensions are the size of the state plus the action size.  
 
-This model differs from the `ddpg-pendulum` by using a larger buffer size to keep track of twenty agents.  The network has slightly different layer sizes because I felt like using model architecture that I was used to using and hopefully it handles batch processing better.  It has an UPDATE_EVERY parameter to stabilize training, but every time step interval it does train, it trains multiple times, in this case the same number of training iterations occur as if you trained every time step.  That seemed to work well.
+This model differs from the `ddpg-pendulum` by using a slightly different network layer sizes because I felt like using model architecture that I was used to using and hopefully it handles batch processing better.  It has an UPDATE_EVERY parameter to stabilize training, but every time step interval it does train, it trains multiple times, in this case the same number of training iterations occur as if you trained every time step.  That seemed to work well.
 
 ### Plot of rewards
 The environment reached a benchmark average reward of +0.5 over 100 episodes after 7120 episodes. To be clear, the score for each episode is the maximum score of the two agents. A plot is shown below along with a sample of the output taken in the middle of training.  
